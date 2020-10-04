@@ -19,7 +19,7 @@ options.add_argument("--disable-extensions")
 options.add_argument("--ignore-certificate-errors")
 driver = webdriver.Chrome(chrome_options=options)
 count = 1 #count
-driver.get('https://www.google.com')
+driver.get('https://duckduckgo.com')
 
 #Graphics
 class color:
