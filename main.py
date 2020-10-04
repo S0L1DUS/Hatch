@@ -13,10 +13,11 @@ from pyvirtualdisplay import Display
 
 display = Display(visible=1, size=(800, 800))  
 display.start()
-driver = webdriver.Chrome()
 options = webdriver.ChromeOptions()
 options.add_argument("--disable-popup-blocking")
-options.add_argument("--disable-extensions")
+options.add_argument("--disable-extensions") 
+options.add_argument("--ignore-certificate-errors")
+driver = webdriver.Chrome(chrome_options=options)
 count = 1 #count
 driver.get('https://www.google.com')
 
@@ -53,7 +54,7 @@ def main():
     sys.stdout.flush()
     t.sleep(1)
     try:
-        request = requests.get(website)
+        request = requests.get(website, verify=False)
         if request.status_code == 200:
             print (color.GREEN + '[OK]'+color.CWHITE)
             sys.stdout.flush()
@@ -76,6 +77,7 @@ def main():
     options = webdriver.ChromeOptions()
     options.add_argument("--disable-popup-blocking")
     options.add_argument("--disable-extensions")
+    options.add_argument("--ignore-certificate-errors")
     count = 1 #count
     browser = webdriver.Chrome(chrome_options=options)
     browser.get(website)
@@ -83,6 +85,7 @@ def main():
         try:
             for line in f:
                 browser.get(website)
+                t.sleep(1)
                 Sel_user = browser.find_element_by_css_selector(username_selector) #Finds Selector
                 Sel_pas = browser.find_element_by_css_selector(password_selector) #Finds Selector
                 enter = browser.find_element_by_css_selector(login_btn_selector) #Finds Selector
